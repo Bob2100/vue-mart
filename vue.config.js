@@ -18,6 +18,16 @@ module.exports = {
   configureWebpack: {
     devServer: {
       before(app) {
+        // 中间件
+        app.use(function (req, res, next) {
+          if (/^\/api/.test(req.path)) {
+            if (req.headers.token || req.path == '/api/login') {
+              next();
+            } else {
+              res.sendStatus(401);
+            }
+          }
+        });
         app.get("/api/goods", function (req, res) {
           function* IdGenerator() {
             let id = 0;
@@ -48,6 +58,11 @@ module.exports = {
               message: '用户名或密码错误'
             });
           }
+        });
+        app.get("/api/logout", function (req, res) {
+          res.json({
+            code: -1,
+          });
         });
       }
     }
