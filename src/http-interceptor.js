@@ -7,6 +7,7 @@ axios.interceptors.request.use(config => {
   if (store.state.token) {
     config.headers.token = store.state.token;
   }
+  return config;
 });
 axios.interceptors.response.use(
   response => {
@@ -16,11 +17,13 @@ axios.interceptors.response.use(
         clearHandler();
       }
     }
+    return response;
   },
   err => {
     if (err.response.status == 401) {
       clearHandler();
     }
+    return err;
   }
 );
 
