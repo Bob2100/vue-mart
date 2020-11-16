@@ -27,7 +27,7 @@ module.exports = {
               res.sendStatus(401);
             }
           } else {
-            next;
+            next();
           }
         });
         app.get("/api/goods", function (req, res) {

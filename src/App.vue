@@ -17,11 +17,11 @@ export default {
     ...mapGetters(["isLogin"]),
   },
   methods: {
-    logout() {
+    async logout() {
       this.$http.get("/api/logout");
     },
     async getGoods() {
-      const ret = await this.$http.get("api/goods");
+      const ret = await this.$http.get("/api/goods");
       console.log(ret);
     },
   },
