@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/login" v-if="!isLogin">Login</router-link>
-      <a href="" @click="logout">Logout</a>|
+      <a href="" v-if="isLogin" @click="logout">Logout</a> |
       <a href="" @click="getGoods">商品列表</a>
     </div>
     <router-view />
