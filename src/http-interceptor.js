@@ -30,7 +30,6 @@ axios.interceptors.response.use(
 function clearHandler() {
   store.commit('setToken', '');
   localStorage.removeItem('token');
-
   router.push({
     path: '/login',
     query: {

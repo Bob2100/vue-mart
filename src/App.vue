@@ -4,8 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/login" v-if="!isLogin">Login</router-link>
-      <a href="" v-if="isLogin" @click="logout">Logout</a> |
-      <a href="" @click="getGoods">商品列表</a>
+      <a href="" v-if="isLogin" @click="logout">Logout</a>
     </div>
     <router-view />
   </div>
@@ -19,10 +18,6 @@ export default {
   methods: {
     async logout() {
       this.$http.get("/api/logout");
-    },
-    async getGoods() {
-      const ret = await this.$http.get("/api/goods");
-      console.log(ret);
     },
   },
 };
