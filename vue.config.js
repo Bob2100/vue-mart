@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 module.exports = {
   css: {
     loaderOptions: {
@@ -18,6 +19,7 @@ module.exports = {
   configureWebpack: {
     devServer: {
       before(app) {
+        app.use(bodyParser.json());
         // 中间件
         app.use(function (req, res, next) {
           if (/^\/api/.test(req.path)) {
@@ -47,8 +49,8 @@ module.exports = {
             ]
           });
         });
-        app.get("/api/login", function (req, res) {
-          const { username, password } = req.query;
+        app.post("/api/login", function (req, res) {
+          const { username, password } = req.body;
           if (username == 'bob' && password == '123') {
             res.json({
               code: 0,

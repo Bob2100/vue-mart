@@ -65,9 +65,12 @@ export default {
     async submitHandler(e) {
       e.preventDefault();
 
-      const res = await this.$http.get("/api/login", {
-        params: {
-          ...this.model,
+      const res = await this.$http({
+        url: "/api/login",
+        method: "post",
+        data: this.model,
+        headers: {
+          "Content-Type": "application/json",
         },
       });
       const { code, token, message } = res.data;
