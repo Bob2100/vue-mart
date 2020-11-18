@@ -21,6 +21,14 @@ export default {
       ],
     };
   },
+  watch: {
+    $route(route) {
+      this.selectLabel = route.path;
+    },
+  },
+  created() {
+    this.selectLabel = this.$route.path;
+  },
   computed: {
     ...mapGetters(["isLogin"]),
   },
