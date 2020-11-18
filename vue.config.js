@@ -33,20 +33,144 @@ module.exports = {
           }
         });
         app.get("/api/goods", function (req, res) {
-          function* IdGenerator() {
-            let id = 0;
-            while (true) {
-              yield id++;
-            }
-          }
-          const idGenerator = IdGenerator();
           res.json({
             code: 0,
-            list: [
-              { id: idGenerator.next().value, text: "Java架构师", price: 200 },
-              { id: idGenerator.next().value, text: "前端架构师", price: 20000 },
-              { id: idGenerator.next().value, text: "PHP架构师", price: 100 }
-            ]
+            slider: [
+              {
+                id: 21,
+                img: '/img/01.jpg'
+              },
+              {
+                id: 22,
+                img: '/img/02.jpg'
+              },
+              {
+                id: 23,
+                img: '/img/03.jpg'
+              },
+              {
+                id: 24,
+                img: '/img/04.jpg'
+              },
+            ],
+            data: {
+              fe: [
+                {
+                  id: 1,
+                  title: 'Vue2.x实战',
+                  price: '100',
+                  img: '/img/01.jpg',
+                  count: 100
+                },
+                {
+                  id: 2,
+                  title: 'React16.x实战',
+                  price: '200',
+                  img: '/img/02.jpg',
+                  count: 100
+                },
+                {
+                  id: 3,
+                  title: 'Anglur16.x实战',
+                  price: '300',
+                  img: '/img/03.jpg',
+                  count: 100
+                },
+              ],
+              python: [
+                {
+                  id: 4,
+                  title: 'python实战',
+                  price: '100',
+                  img: '/img/04.jpg',
+                  count: 100
+                },
+                {
+                  id: 5,
+                  title: 'python基础',
+                  price: '200',
+                  img: '/img/05.jpg',
+                  count: 100
+                },
+                {
+                  id: 6,
+                  title: 'python架构设计',
+                  price: '300',
+                  img: '/img/06.jpg',
+                  count: 100
+                },
+              ],
+              java: [
+                {
+                  id: 7,
+                  title: 'java基础',
+                  price: '100',
+                  img: '/img/07.jpg',
+                  count: 100
+                },
+                {
+                  id: 8,
+                  title: 'springmvc',
+                  price: '200',
+                  img: '/img/08.jpg',
+                  count: 100
+                },
+                {
+                  id: 9,
+                  title: 'springboot',
+                  price: '300',
+                  img: '/img/09.jpg',
+                  count: 100
+                },
+              ],
+              bigdata: [
+                {
+                  id: 10,
+                  title: '数据分析',
+                  price: '100',
+                  img: '/img/10.jpg',
+                  count: 100
+                },
+                {
+                  id: 11,
+                  title: '图表构建',
+                  price: '200',
+                  img: '/img/11.jpg',
+                  count: 100
+                },
+                {
+                  id: 12,
+                  title: '数据可视化',
+                  price: '300',
+                  img: '/img/12.jpg',
+                  count: 100
+                },
+              ],
+              ai: [
+                {
+                  id: 13,
+                  title: '自动化编程',
+                  price: '100',
+                  img: '/img/13.jpg',
+                  count: 100
+                },
+                {
+                  id: 14,
+                  title: '智能化家居',
+                  price: '200',
+                  img: '/img/14.jpg',
+                  count: 100
+                },
+                {
+                  id: 15,
+                  title: '人工智能基础',
+                  price: '300',
+                  img: '/img/15.jpg',
+                  count: 100
+                },
+              ],
+            },
+            keys: ['fe', 'python', 'java', 'bigdata', 'ai']
           });
         });
         app.post("/api/login", function (req, res) {

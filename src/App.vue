@@ -1,23 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login" v-if="!isLogin">Login</router-link>
-      <a href="" v-if="isLogin" @click="logout">Logout</a>
-    </div>
     <router-view />
+    <cube-tab-bar
+      v-model="selectLabel"
+      :data="tabs"
+      @change="changeHandler"
+    ></cube-tab-bar>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      selectLabel: "/",
+      tabs: [
+        { label: "Home", value: "/", icon: "cubeic-home" },
+        { label: "Cart", value: "/cart", icon: "cubeic-mall" },
+        { label: "Me", value: "/login", icon: "cubeic-person" },
+      ],
+    };
+  },
   computed: {
     ...mapGetters(["isLogin"]),
   },
   methods: {
     async logout() {
       this.$http.get("/api/logout");
+    },
+    changeHandler(value) {
+      this.$router.push(value);
     },
   },
 };
