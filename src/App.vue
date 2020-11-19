@@ -2,6 +2,7 @@
   <div id="app">
     <router-view />
     <cube-tab-bar
+      class="mart_tab-bar"
       v-model="selectLabel"
       :data="tabs"
       @change="changeHandler"
@@ -42,7 +43,14 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="less">
+.mart_tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #edf0f4;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
