@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="mart_move">
+      <router-view class="mart_view" />
+    </transition>
     <cube-tab-bar
       show-slider
       inline
@@ -46,6 +48,23 @@ export default {
 };
 </script>
 <style lang="less">
+.mart_view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-bottom: 36px;
+  width: 100%;
+}
+.mart_move-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.mart_move-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.mart_move-enter-active,
+.mart_move-leave-active {
+  transition: transform 0.3s;
+}
 .mart_tab-bar {
   position: fixed;
   bottom: 0;
