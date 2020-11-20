@@ -2,6 +2,8 @@
   <div id="app">
     <router-view />
     <cube-tab-bar
+      show-slider
+      inline
       class="mart_tab-bar"
       v-model="selectLabel"
       :data="tabs"
