@@ -7,13 +7,30 @@
         </router-link>
       </cube-slide-item>
     </cube-slide>
+
+    <cube-button @click="showDrawer">请选择分类</cube-button>
+
     <good-list :goods="filterGoods"></good-list>
+
+    <cube-drawer
+      ref="drawer"
+      title="请选择"
+      :data="drawData"
+      @select="selectHandler"
+    ></cube-drawer>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import GoodList from "@/components/GoodList.vue";
+const DRAWER_LABEL = {
+  fe: "前端",
+  python: "Python",
+  java: "Java",
+  bigdata: "大数据",
+  ai: "人工智能",
+};
 export default {
   name: "Home",
   components: {
@@ -29,11 +46,22 @@ export default {
   },
   computed: {
     filterGoods() {
-      let  ret = [];
+      let ret = [];
       this.selectedKeys.forEach((key) => {
         ret = ret.concat(this.goods[key]);
       });
       return ret;
+    },
+    drawData() {
+      const drawerData = [];
+      const drawerList = this.keys.map((key) => {
+        return {
+          text: DRAWER_LABEL[key],
+          value: key,
+        };
+      });
+      drawerData.push(drawerList);
+      return drawerData;
     },
   },
   async created() {
@@ -44,6 +72,14 @@ export default {
     this.keys = keys;
     this.goods = goods;
     this.selectedKeys = [...keys];
+  },
+  methods: {
+    showDrawer() {
+      this.$refs.drawer.show();
+    },
+    selectHandler(selectedVal) {
+      this.selectedKeys = [...selectedVal];
+    },
   },
 };
 </script>

@@ -52,6 +52,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
+  bottom: 0;
   padding-bottom: 36px;
   width: 100%;
 }

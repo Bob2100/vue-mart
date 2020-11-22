@@ -62,20 +62,6 @@ module.exports = {
                   img: '/img/01.jpg',
                   count: 100
                 },
-                {
-                  id: 2,
-                  title: 'React16.x实战',
-                  price: '200',
-                  img: '/img/02.jpg',
-                  count: 100
-                },
-                {
-                  id: 3,
-                  title: 'Anglur16.x实战',
-                  price: '300',
-                  img: '/img/03.jpg',
-                  count: 100
-                },
               ],
               python: [
                 {
