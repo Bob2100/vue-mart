@@ -30,6 +30,9 @@ export default {
         imgs: [img],
       }).show();
     },
+    addCart(good) {
+      this.$store.commit("addCart", good);
+    },
   },
 };
 </script>

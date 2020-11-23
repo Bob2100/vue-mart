@@ -3,13 +3,25 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    token: localStorage.getItem('token') || ''
+    token: localStorage.getItem('token') || '',
+    cart: JSON.parse(localStorage.getItem('cart')) || []
   },
   mutations: {
     setToken(state, token) {
       state.token = token;
+    },
+    addCart(state, good) {
+      const item = state.cart.find(v => v.id == good.id);
+      if (item) {
+        item.count++;
+      } else {
+        state.cart.push({
+          ...good,
+          count: 1
+        });
+      }
     }
   },
   getters: {
@@ -21,4 +33,17 @@ export default new Vuex.Store({
   },
   modules: {
   }
-})
+});
+
+store.subscribe((mutation, state) => {
+  switch (mutation.type) {
+    case "setToken":
+      localStorage.setItem('token', state.token);
+      break;
+    case "addCart":
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+      break;
+  }
+});
+
+export default store
