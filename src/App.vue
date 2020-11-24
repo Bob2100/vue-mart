@@ -8,9 +8,20 @@
       inline
       class="mart_tab-bar"
       v-model="selectLabel"
-      :data="tabs"
       @change="changeHandler"
-    ></cube-tab-bar>
+    >
+      <cube-tab
+        v-for="(item, index) in tabs"
+        :icon="item.icon"
+        :label="item.label"
+        :value="item.value"
+        :key="index"
+      >
+        <span class="mart_cart-badge" v-if="isShowTotal(item)">{{
+          cartTotal
+        }}</span>
+      </cube-tab>
+    </cube-tab-bar>
   </div>
 </template>
 <script>
@@ -35,7 +46,7 @@ export default {
     this.selectLabel = this.$route.path;
   },
   computed: {
-    ...mapGetters(["isLogin"]),
+    ...mapGetters(["isLogin", "cartTotal"]),
   },
   methods: {
     async logout() {
@@ -44,10 +55,21 @@ export default {
     changeHandler(value) {
       this.$router.push(value);
     },
+    isShowTotal(tab) {
+      return tab.label == "Cart" && this.cartTotal > 0;
+    },
   },
 };
 </script>
 <style lang="less">
+.mart_cart-badge {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background: rgba(235, 121, 93, 0.959);
+  color: white;
+  border-radius: 50%;
+}
 .mart_view {
   position: absolute;
   left: 0;

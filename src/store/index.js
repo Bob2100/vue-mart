@@ -27,6 +27,13 @@ const store = new Vuex.Store({
   getters: {
     isLogin: state => {
       return !!state.token;
+    },
+    cartTotal: state => {
+      let total = 0;
+      state.cart.forEach(v => {
+        total += v.count;
+      });
+      return total;
     }
   },
   actions: {
