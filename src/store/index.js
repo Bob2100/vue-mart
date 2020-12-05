@@ -22,6 +22,17 @@ const store = new Vuex.Store({
           count: 1
         });
       }
+    },
+    countMinus(state, index) {
+      const item = state.cart[index];
+      if (item.count > 1) {
+        item.count--;
+      } else {
+        state.cart.splice(index, 1);
+      }
+    },
+    countAdd(state, index) {
+      state.cart[index].count++;
     }
   },
   getters: {
@@ -34,7 +45,8 @@ const store = new Vuex.Store({
         total += v.count;
       });
       return total;
-    }
+    },
+    total: state => state.cart.reduce((num, item) => num + item.count * item.price, 0)
   },
   actions: {
   },

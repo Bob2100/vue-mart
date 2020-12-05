@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const PUBLIC_PATH = ['/api/login', '/api/goods'];
 module.exports = {
   css: {
     loaderOptions: {
@@ -23,7 +24,7 @@ module.exports = {
         // 中间件
         app.use(function (req, res, next) {
           if (/^\/api/.test(req.path)) {
-            if (req.headers.token || req.path == '/api/login') {
+            if (req.headers.token || PUBLIC_PATH.indexOf(req.path) != -1) {
               next();
             } else {
               res.sendStatus(401);
