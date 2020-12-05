@@ -1,5 +1,6 @@
 <template>
   <div>
+    <m-header title="Vue Mart"></m-header>
     <div class="good" v-for="(item, index) in cart" :key="item.id">
       {{ item.title }}
       <div class="right">

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <m-header title="Vue Mart"></m-header>
     <cube-form
       :model="model"
       :schema="schema"
