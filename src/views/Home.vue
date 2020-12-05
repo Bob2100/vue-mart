@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <m-header title="Vue Mart"></m-header>
     <cube-slide ref="slide" :data="items" class="mart_slide">
       <cube-slide-item v-for="(item, index) in items" :key="index">
         <router-link :to="`/detail/${item.id}`">
