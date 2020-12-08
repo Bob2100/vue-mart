@@ -4,8 +4,15 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import store from '@/store';
 import Cart from '@/views/Cart.vue';
+import History from '@/utils/history.js';
 
 Vue.use(VueRouter)
+Vue.use(History);
+
+VueRouter.prototype.goBack = function () {
+  this.isBack = true;
+  this.back();
+}
 
 const routes = [
   {
@@ -55,6 +62,15 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+
+router.afterEach((to) => {
+  if (router.isBack) {
+    History.pop();
+  } else {
+    History.push(to.path);
+  }
+  router.isBack = false;
 });
 
 export default router
