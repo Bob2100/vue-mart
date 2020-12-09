@@ -67,8 +67,11 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to) => {
   if (router.isBack) {
     History.pop();
+    router.isBack = false;
+    router.transitionName = 'mart_back';
   } else {
     History.push(to.path);
+    router.transitionName = 'mart_forward';
   }
   router.isBack = false;
 });

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="mart_move">
+    <transition :name="transitionName">
       <router-view class="mart_view" />
     </transition>
     <cube-tab-bar
@@ -35,10 +35,12 @@ export default {
         { label: "Cart", value: "/cart", icon: "cubeic-mall" },
         { label: "Me", value: "/login", icon: "cubeic-person" },
       ],
+      transitionName: "mart_forward",
     };
   },
   watch: {
     $route(route) {
+      this.transitionName = this.$router.transitionName;
       this.selectLabel = route.path;
     },
   },
@@ -78,16 +80,29 @@ export default {
   padding-bottom: 36px;
   width: 100%;
 }
-.mart_move-enter {
+
+.mart_forward-enter {
   transform: translate3d(-100%, 0, 0);
 }
-.mart_move-leave-to {
+.mart_forward-leave-to {
   transform: translate3d(100%, 0, 0);
 }
-.mart_move-enter-active,
-.mart_move-leave-active {
+.mart_forward-enter-active,
+.mart_forward-leave-active {
   transition: transform 0.3s;
 }
+
+.mart_back-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.mart_back-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+.mart_back-enter-active,
+.mart_back-leave-active {
+  transition: transform 0.3s;
+}
+
 .mart_tab-bar {
   position: fixed;
   bottom: 0;
