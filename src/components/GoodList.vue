@@ -12,7 +12,10 @@
         <div class="right">
           <div class="title">{{ good.title }}</div>
           <div class="info">
-            <i class="cubeic-add" @click.stop.prevent="addCart(good)"></i>
+            <i
+              class="cubeic-add"
+              @click.stop.prevent="addCart($event, good)"
+            ></i>
             <span>{{ good.count }}人购买</span>
           </div>
         </div>
@@ -30,8 +33,9 @@ export default {
         imgs: [img],
       }).show();
     },
-    addCart(good) {
+    addCart(e, good) {
       this.$store.commit("addCart", good);
+      this.$emit("addCart", e.target);
     },
   },
 };
