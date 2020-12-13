@@ -90,6 +90,8 @@ export default {
   methods: {
     showDrawer() {
       this.$refs.drawer.show();
+      const notice = this.$createNotice();
+      notice.add({ content: "hello", duration: 2 });
     },
     selectHandler(selectedVal) {
       this.selectedKeys = [...selectedVal];
