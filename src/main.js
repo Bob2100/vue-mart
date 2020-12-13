@@ -8,12 +8,14 @@ import httpInterceptor from '@/http-interceptor';// eslint-disable-line no-unuse
 import MHeader from '@/components/Header.vue';
 import Notice from '@/components/Notice.vue';
 import { createAPI } from 'cube-ui';
+import notice from '@/services/notice.js';
 
 // 全局组件
 Vue.component('m-header', MHeader);
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;
+Vue.prototype.$notice = notice;
 
 createAPI(Vue, Notice, true);
 new Vue({

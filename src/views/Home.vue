@@ -90,8 +90,12 @@ export default {
   methods: {
     showDrawer() {
       this.$refs.drawer.show();
-      const notice = this.$createNotice();
-      notice.add({ content: "hello", duration: 2 });
+      // const notice = this.$createNotice();
+      // notice.add({ content: "hello", duration: 2 });
+      this.$notice.info({
+        content: "通知",
+        duration: 3,
+      });
     },
     selectHandler(selectedVal) {
       this.selectedKeys = [...selectedVal];
