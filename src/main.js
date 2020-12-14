@@ -7,6 +7,7 @@ import axios from 'axios';
 import httpInterceptor from '@/http-interceptor';// eslint-disable-line no-unused-vars
 import MHeader from '@/components/Header.vue';
 import Notice from '@/components/Notice.vue';
+import BallAnim from '@/components/BallAnim.vue';
 import { createAPI } from 'cube-ui';
 import notice from '@/services/notice.js';
 
@@ -18,6 +19,8 @@ Vue.prototype.$http = axios;
 Vue.prototype.$notice = notice;
 
 createAPI(Vue, Notice, true);
+createAPI(Vue, BallAnim, ['transitionend']);
+
 new Vue({
   router,
   store,

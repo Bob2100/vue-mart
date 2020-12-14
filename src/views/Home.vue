@@ -19,15 +19,6 @@
       :data="drawData"
       @select="selectHandler"
     ></cube-drawer>
-    <div class="ball-wrap">
-      <transition
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @after-enter="afterEnter"
-      >
-        <div class="ball" v-show="ball.show"></div>
-      </transition>
-    </div>
   </div>
 </template>
 
@@ -52,10 +43,6 @@ export default {
       goods: {},
       keys: [],
       selectedKeys: [],
-      ball: {
-        show: false,
-        target: null,
-      },
     };
   },
   computed: {
@@ -100,28 +87,14 @@ export default {
     selectHandler(selectedVal) {
       this.selectedKeys = [...selectedVal];
     },
-    beforeEnter(el) {
-      const rect = this.ball.target.getBoundingClientRect();
-      // 计算起始偏移量
-      const x = rect.left - window.innerWidth / 2;
-      const y = -(window.innerHeight - rect.top - 30);
-      el.style.display = "";
-      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    },
-    enter(el, done) {
-      // 触发重绘
-      document.body.offsetHeight;
-
-      el.style.transform = "translate3d(0, 0, 0)";
-      el.addEventListener("transitionend", done);
-    },
-    afterEnter(el) {
-      this.ball.show = false;
-      el.style.display = "none";
-    },
     onAddCart(target) {
-      this.ball.target = target;
-      this.ball.show = true;
+      const anim = this.$createBallAnim({
+        target,
+        onTransitionend() {
+          anim.remove();
+        },
+      });
+      anim.start();
     },
   },
 };
@@ -133,18 +106,5 @@ export default {
 .mart_slide-img {
   width: 100%;
   height: 200px;
-}
-.ball-wrap {
-  .ball {
-    position: fixed;
-    left: 50%;
-    bottom: 10px;
-    z-index: 200;
-    background-color: red;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
-  }
 }
 </style>
