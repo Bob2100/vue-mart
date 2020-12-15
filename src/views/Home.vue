@@ -25,6 +25,8 @@
 <script>
 // @ is an alias to /src
 import GoodList from "@/components/GoodList.vue";
+import create from "@/services/create";
+import BallAnim from "@/components/BallAnim.vue";
 const DRAWER_LABEL = {
   fe: "前端",
   python: "Python",
@@ -88,13 +90,18 @@ export default {
       this.selectedKeys = [...selectedVal];
     },
     onAddCart(target) {
-      const anim = this.$createBallAnim({
-        target,
-        onTransitionend() {
-          anim.remove();
-        },
-      });
+      // const anim = this.$createBallAnim({
+      //   target,
+      //   onTransitionend() {
+      //     anim.remove();
+      //   },
+      // });
+      // anim.start();
+      const anim = create(BallAnim, { target });
       anim.start();
+      anim.$on("transitionend", () => {
+        anim.remove();
+      });
     },
   },
 };

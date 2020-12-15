@@ -52,6 +52,7 @@ export default {
     afterEnter(el) {
       this.ball.show = false;
       el.style.display = "none";
+      this.$emit("transitionend");
     },
   },
 };
